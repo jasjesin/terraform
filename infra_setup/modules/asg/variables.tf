@@ -18,15 +18,6 @@ variable "key" {
   default = "Name"
 }
 
-# variables needed for launch template
-variable "ami_id" {
-  description = "This value needs to be fetched from parent module"
-}
-
-variable "sg_id" {
-  description = "This value needs to be fetched from parent module"
-}
-
 variable "environment" {
   description = "This value needs to be fetched from parent module"
 }

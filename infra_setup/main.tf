@@ -31,7 +31,7 @@ module "subnet" {
   depends_on = [module.vpc]
 }
 
-
+/*
 # This module is dependent on creation of subnet IDs & cannot run independently
 module "ec2" {
   source = "./modules/ec2"
@@ -40,12 +40,14 @@ module "ec2" {
   vpc_id      = module.vpc.vpc_id
   environment = var.environment
 
-  depends_on = [ module.vpc ]
+  depends_on = [module.vpc]
 }
-
+*/
 
 /*
 # This module is dependent on creation of EC2 IDs & cannot run independently
+# This module is NOT TESTED yet
+# tf validate comes clean
 module "elb" {
   source = "./modules/elb"
 
@@ -56,13 +58,35 @@ module "elb" {
 }
 */
 
-/* This module is NOT TESTED yet
+/*
+# This module is NOT TESTED yet. 
+# tf validate comes clean
 module "asg" {
   source = "./modules/asg"
 
-  name = var.name
-  vpc_id = var.vpc_id
+  name        = var.name
+  vpc_id      = var.vpc_id
   environment = var.environment
+  min         = var.min
+  max         = var.max
+}
+*/
+
+/*
+# This module is dependent on creation of subnet IDs & cannot run independently
+# This module is NOT TESTED yet
+# tf validate comes clean
+module "rds" {
+  source = "./modules/rds"
+
+  name   = var.name
+  vpc_id = var.vpc_id
+
+  rds_family         = var.rds_family
+  rds_engine         = var.rds_engine
+  rds_instance_class = var.rds_instance_class
+  rds_storage        = var.rds_storage
+  rds_user           = var.rds_user
 }
 */
 

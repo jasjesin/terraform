@@ -103,3 +103,39 @@ output "listener_id" {
   value = module.elb.listener_id
 }
 */
+
+/*
+output "tg_id" {
+  value = module.asg.tg_id
+}
+
+output "asg_sg_id" {
+  value = module.asg.asg_sg_id
+}
+
+output "lc_id" {
+  value = module.asg.lc_id
+}
+
+output "asg_id" {
+  value = module.asg.asg_id
+}
+*/
+
+/*
+output "rds_sg_id" {
+  value = module.rds.rds_sg_id
+}
+
+output "rds_subnet_grp_id" {
+  value = module.rds.rds_subnet_grp_id
+}
+
+output "db_pmtr_grp_id" {
+    value = module.rds.db_pmtr_grp_id
+}
+
+output "rds_id" {
+    value = module.rds.rds_id
+}
+*/

@@ -1,5 +1,5 @@
 output "tg_id" {
-  value = module.tg.td_id
+  value = module.tg.tg_id
 }
 
 output "asg_sg_id" {

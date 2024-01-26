@@ -1,3 +1,4 @@
+/*
 output "user_ids" {
   value = module.iam.user_ids
 }
@@ -17,7 +18,7 @@ output "policy_id" {
 output "policy_attachment_id" {
   value = module.iam.policy_attachment_id
 }
-
+*/
 /*
 output "vpc_id" {
   value = module.vpc.vpc_id
@@ -78,5 +79,27 @@ output "ec2_id" {
 /*
 output "sg_id" {
   value = module.ec2.sg_id
+}
+*/
+
+/*
+output "elb_id" {
+  value = module.elb.elb_id
+}
+
+output "sg_id" {
+  value = module.elb.sg_id
+}
+
+output "tg_id" {
+  value = module.elb.tg_id
+}
+
+output "attach_tg_id" {
+  value = module.elb.attach_tg_id
+}
+
+output "listener_id" {
+  value = module.elb.listener_id
 }
 */

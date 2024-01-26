@@ -14,7 +14,7 @@ resource "aws_instance" "ec2" {
   #ami                    = "ami-0c7217cdde317cfec" # ubuntu ami in us-east-1
   instance_type          = lookup(var.instance_type, "${var.environment}")
   vpc_security_group_ids = [module.sg.ec2_sg_id]
-  user_data              = file("${path.module}/user_data/svr_setup.sh")
+  user_data              = file("${path.module}/../common/user_data/svr_setup.sh")
 
   lifecycle {
     create_before_destroy = true

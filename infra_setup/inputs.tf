@@ -23,6 +23,10 @@ variable "region" {
   description = "This is a mandatory input"
 }
 
+variable "vpc_id" {
+  default = null  
+}
+
 variable "cidr_block" {
   description = "This is a mandatory input"
 }

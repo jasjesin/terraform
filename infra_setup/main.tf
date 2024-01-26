@@ -1,4 +1,4 @@
-
+/*
 module "iam" {
   source = "./modules/iam"
 
@@ -6,8 +6,8 @@ module "iam" {
   group       = var.group
   policy_name = var.policy_name
 }
+*/
 
-/*
 module "vpc" {
   source = "./modules/vpc"
 
@@ -31,26 +31,47 @@ module "subnet" {
   depends_on = [module.vpc]
 }
 
+
+# This module is dependent on creation of subnet IDs & cannot run independently
 module "ec2" {
   source = "./modules/ec2"
 
   name        = var.name
   vpc_id      = module.vpc.vpc_id
   environment = var.environment
-#  independent = var.independent
-#  subnet_ids  = var.subnet_ids
 
-  depends_on = [module.subnet]
+  depends_on = [ module.vpc ]
+}
+
+
+/*
+# This module is dependent on creation of EC2 IDs & cannot run independently
+module "elb" {
+  source = "./modules/elb"
+
+  name = var.name
+  vpc_id = module.vpc.vpc_id
+
+  depends_on = [ module.ec2, module.vpc ]
 }
 */
 
-# one-time bucket creation
+/* This module is NOT TESTED yet
+module "asg" {
+  source = "./modules/asg"
+
+  name = var.name
+  vpc_id = var.vpc_id
+  environment = var.environment
+}
+*/
+
+# one-time bucket creation for backend setup
 resource "aws_s3_bucket" "tf_s3" {
   bucket = "tf-sensitive"
 }
 
-
-# one-time bucket creation
+# one-time bucket creation for backend state lock fix
 resource "aws_dynamodb_table" "tf_lock" {
   name         = "tf-lock"
   billing_mode = "PAY_PER_REQUEST"
@@ -61,3 +82,11 @@ resource "aws_dynamodb_table" "tf_lock" {
     type = "S"
   }
 }
+
+
+# Future enhancements for ec2 module to be used independently
+#  vpc_id      = var.vpc_id == null ? data.aws_vpc.default : var.vpc_id
+#  vpc_id      = var.vpc_id == null ? (module.vpc.vpc_id == null ? module.vpc.vpc_id : data.aws_vpc.default ) : var.vpc_id
+#  independent = var.independent
+#  subnet_ids  = var.subnet_ids
+#  depends_on = [module.subnet]

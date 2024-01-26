@@ -1,4 +1,13 @@
 
+module "iam" {
+  source = "./modules/iam"
+
+  users       = var.users
+  group       = var.group
+  policy_name = var.policy_name
+}
+
+/*
 module "vpc" {
   source = "./modules/vpc"
 
@@ -33,7 +42,7 @@ module "ec2" {
 
   depends_on = [module.subnet]
 }
-
+*/
 
 # one-time bucket creation
 resource "aws_s3_bucket" "tf_s3" {

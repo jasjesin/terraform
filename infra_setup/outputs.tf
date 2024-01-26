@@ -1,4 +1,24 @@
+output "user_ids" {
+  value = module.iam.user_ids
+}
 
+output "group_id" {
+  value = module.iam.group_id
+}
+
+output "membership_id" {
+  value = module.iam.membership_id
+}
+
+output "policy_id" {
+  value = module.iam.policy_id
+}
+
+output "policy_attachment_id" {
+  value = module.iam.policy_attachment_id
+}
+
+/*
 output "vpc_id" {
   value = module.vpc.vpc_id
 }
@@ -55,6 +75,8 @@ output "ec2_id" {
   value = module.ec2.ec2
 }
 */
+/*
 output "sg_id" {
   value = module.ec2.sg_id
 }
+*/
